@@ -60,6 +60,7 @@ constructor() {
       console.log("Genesis block added");
     } catch(err) {
       console.log("error inside addGenesisBlock:" + err);
+      throw err;
     }
 
   }
@@ -89,9 +90,11 @@ constructor() {
     // Block hash with SHA256 using newBlock and converting to a string
     newBlock.hash = await SHA256(JSON.stringify(newBlock)).toString();
     // Adding block object to chain
-  	await db.put(newBlock.height, JSON.stringify(newBlock).toString());
+    await db.put(newBlock.height, JSON.stringify(newBlock).toString());
+    return newBlock;
     } catch (err) {
       console.log("Error in AddBlock:"+err);
+      throw err;
     }
   }
 
@@ -114,11 +117,12 @@ constructor() {
   // get block
   async getBlock(blockHeight) {
     try {
+      console.log("fetching block from db with id: "+ blockHeight);
       let blockVal = await db.get(blockHeight);
       return JSON.parse(blockVal); 
     } catch(err) {
       console.log("Error in getBlock:"+err);
-      return null;
+      throw err;
     }
   }
 
