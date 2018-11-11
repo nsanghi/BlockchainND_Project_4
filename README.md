@@ -118,7 +118,7 @@ In this project a simple private blockchain is implemented with functionality to
 
 -`simpleChain.js` contains the complete code. For more details on this please refer to [Project 2](https://github.com/nsanghi/BlockchainND_Project_2) 
 
--`app.js` contains the code to run an api server to provide api interface to the blockchain.
+-`app.js` server to provide api endpoints to the blockchain.
 
 
 ## Testing
