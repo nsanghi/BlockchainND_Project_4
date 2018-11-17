@@ -311,6 +311,7 @@ In this project a simple private blockchain is implemented with functionality to
 ## Testing
 
 To test code:
+
 1: Open a command prompt or shell terminal after installing node.js.
 
 2: Run test cases in file `testBlockchain.js` using following command:
