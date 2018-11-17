@@ -1,7 +1,5 @@
-const BlockchainClasses = require('./simpleChain.js');
-
-const Block = BlockchainClasses.Block;
-const Blockchain = BlockchainClasses.Blockchain;
+const Block = require('./Block');
+const Blockchain = require('./Blockchain');
 
 
 //add "i" blocks to chain

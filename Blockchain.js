@@ -4,32 +4,22 @@
 
 const SHA256 = require('crypto-js/sha256');
 
-/* ===== Persist data with LevelDB ===================================
-|  Learn more: level: https://github.com/Level/level     |
-|  =============================================================*/
+/* ===== Persist data with LevelDB ===========================
+|  Learn more: level: https://github.com/Level/level         |
+|  =========================================================*/
 
 const level = require('level');
 const chainDB = './chaindata';
 const db = level(chainDB);
 
 
+/*======= Import Block class =================================
+|  Block class                                               |
+|===========================================================*/
+const Block = require('./Block');
 
-/* ===== Block Class ==============================
-|  Class with a constructor for block 			   |
-|  ===============================================*/
-
-class Block{
-	constructor(data){
-     this.hash = "",
-     this.height = 0,
-     this.body = data,
-     this.time = 0,
-     this.previousBlockHash = ""
-    }
-}
-
-/* ===== Blockchain Class ==========================
-|  Class with a constructor for new blockchain 		|
+/* ===== Blockchain Class ===========================
+|  Class with a constructor for new blockchain 		  |
 |  ================================================*/
 
 class Blockchain {
@@ -100,12 +90,12 @@ constructor() {
 
   // Get block height
   getBlockHeight() {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       let i = 0;
       db.createReadStream().on('data', (data) => {
             i++;
           }).on('error', (err) => {
-              return console.log('Unable to read data stream!', err)
+              reject(err);
           }).on('close', () => {
             //console.log('Block Height' + i);
             resolve(i);
@@ -117,7 +107,7 @@ constructor() {
   // get block
   async getBlock(blockHeight) {
     try {
-      console.log("fetching block from db with id: "+ blockHeight);
+      //console.log("fetching block from db with id: "+ blockHeight);
       let blockVal = await db.get(blockHeight);
       return JSON.parse(blockVal); 
     } catch(err) {
@@ -125,6 +115,47 @@ constructor() {
       throw err;
     }
   }
+
+  // get blcok by hash
+  async getBlockByHash(blockHash) {
+    return new Promise((resolve, reject) => {
+      let block = null;
+      db.createReadStream()
+      .on('data', (data) => {
+          const value = JSON.parse(data.value);
+          if (value.hash === blockHash) {
+            block = value;
+          }
+      })
+      .on('error', (err) => {
+          reject(err);
+      })
+      .on('close', () => {
+            resolve(block);
+      });
+    });
+  }
+
+  // get block(s) by walletAddress
+  async getBlocksByAddress(address) {
+    return new Promise((resolve, reject) => {
+      let blocks = [];
+      db.createReadStream()
+      .on('data', (data) => {
+          const value = JSON.parse(data.value);
+          if (value.body.walletAddress === address) {
+            blocks.push(value);
+          }
+      })
+      .on('error', (err) => {
+          reject(err);
+      })
+      .on('close', () => {
+            resolve(blocks);
+      });
+    });
+  }
+
 
   // put block
   async putBlock(key, block) {
@@ -185,7 +216,4 @@ constructor() {
   }
 }
 
-module.exports = {
- Blockchain: Blockchain,
- Block: Block
-}
+module.exports = Blockchain;
