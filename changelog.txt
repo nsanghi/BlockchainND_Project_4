@@ -1,0 +1,29 @@
+1. http://localhost:8000/requestValidation
+Comment from reviewer: 
+"Response has correct format – field walletAddress should be renamed to address"
+My response: 
+Though I have renamed the field, project instructions are inconsistent. 
+Some places they have used "walletAddress" and some places "address". 
+I do not think exact name of the field is really that important esp given 
+the inconsistency in instructions. Please check field names in 
+point 4 (requestObject)in "Project Walk-through" 
+vs point 6 (validationRequestByWallet)
+
+
+2. http://localhost:8000/message-signature/validate
+Comment from reviewer:
+Response has correct format – field walletAddress should be renamed to address
+Also validationWindow field should be less than maximum value (300) 
+My Response:
+"walletAddress" vs "address" - same comment as above.
+ValidationWindow - my code is consistent with revised project instructions of 1800 sec timeout 
+for valid requests and 300 sec for validation requests
+
+3. Reviewer Comments + Specs: Star story supports ASCII text, limited to 250 words (500 bytes), and hex encoded.
+My comment: How is one word always 2 bytes? Or was the spec meant to be 250 characters? 
+I have modified to strip out non ASCII characters and restrict the comments to first 250 characters
+
+4. Reviewer: "AddBlock" should not contain "storyDecoded". 
+My comment. Please check point 11 in Project walk-through which shows storyDecoded to be 
+part of response (though not stored in block)
+
