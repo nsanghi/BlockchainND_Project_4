@@ -136,14 +136,14 @@ constructor() {
     });
   }
 
-  // get block(s) by walletAddress
+  // get block(s) by address
   async getBlocksByAddress(address) {
     return new Promise((resolve, reject) => {
       let blocks = [];
       db.createReadStream()
       .on('data', (data) => {
           const value = JSON.parse(data.value);
-          if (value.body.walletAddress === address) {
+          if (value.body.address === address) {
             blocks.push(value);
           }
       })

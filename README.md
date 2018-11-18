@@ -43,7 +43,7 @@ The server right now supports six api endpoints as explained below.
 
 #### 1. POST VALIDATION REQUEST
 
-End point is to generate a request for validation with payload containing a walletAddress.
+End point is to generate a request for validation with payload containing a address.
 
 ##### URL
 
@@ -67,7 +67,7 @@ Registers a request in mempool and returns the request Object
 
 ```javascript
 {
-    "walletAddress": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT",
+    "address": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT",
     "requestTimeStamp": "1542453128",
     "message": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT:1542453128:starRegistry",
     "validationWindow": 300
@@ -78,9 +78,9 @@ Registers a request in mempool and returns the request Object
 
 #### 2. POST VERIFY VALIDATION REQUEST
 
-End point is to verify a request for validation with payload containing a walletAddress and message signature.
+End point is to verify a request for validation with payload containing a address and message signature.
 
-You can use the `message` returned by above request and sign it with the `walletAddress` using [`Electrum`](https://electrum.org/#home). 
+You can use the `message` returned by above request and sign it with the `address` using [`Electrum`](https://electrum.org/#home). 
 
 ##### URL
 
@@ -107,7 +107,7 @@ Validates a request registered in mempool and returns the valid request Object
 {
     "registerStar": true,
     "status": {
-        "walletAddress": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT",
+        "address": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT",
         "requestTimeStamp": "1542453128",
         "message": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT:1542453128:starRegistry",
         "validationWindow": 1800,
@@ -150,7 +150,7 @@ Registers a star against the address in blockchain. Returns the newly added bloc
     "hash": "0ffb3bdeaf779fb297d357b1e3b79e1f7f15337e3ca91aa715b3279cdf3f4df6",
     "height": 2,
     "body": {
-        "walletAddress": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT",
+        "address": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT",
         "star": {
             "dec": "68° 52' 53.9",
             "ra": "16h 29m 1.0s",
@@ -171,13 +171,13 @@ End point is to retrieve a block by hash value.
 "get" to
 
 ```javascript
-http://localhost:8000/block/hash:<hasvalue>
+http://localhost:8000/stars/hash:<hasvalue>
 ```
 
 e.g.
 
 ```javascript
-http://localhost:8000/block/hash:422e46d1b86fa534d5054496a5efc8d9152eebc0d38a74db52845faf9f30561c
+http://localhost:8000/stars/hash:422e46d1b86fa534d5054496a5efc8d9152eebc0d38a74db52845faf9f30561c
 ```
 
 ##### RESPONSE
@@ -189,7 +189,7 @@ Returns a block from blockchain matching the hash value.
     "hash": "422e46d1b86fa534d5054496a5efc8d9152eebc0d38a74db52845faf9f30561c",
     "height": 1,
     "body": {
-        "walletAddress": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT",
+        "address": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT",
         "star": {
             "dec": "68° 52' 56.9",
             "ra": "16h 29m 1.0s",
@@ -229,7 +229,7 @@ Returns a block from blockchain matching blockheight.
     "hash": "422e46d1b86fa534d5054496a5efc8d9152eebc0d38a74db52845faf9f30561c",
     "height": 1,
     "body": {
-        "walletAddress": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT",
+        "address": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT",
         "star": {
             "dec": "68° 52' 56.9",
             "ra": "16h 29m 1.0s",
@@ -251,13 +251,13 @@ End point is to retrieve block(s) by wallet address.
 "get" to
 
 ```javascript
-http://localhost:8000/block/address:<address>
+http://localhost:8000/stars/address:<address>
 ```
 
 e.g.
 
 ```javascript
-http://localhost:8000/block/address:12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT
+http://localhost:8000/stars/address:12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT
 ```
 
 ##### RESPONSE
@@ -270,7 +270,7 @@ Returns block(s) from blockchain matching wallet address.
         "hash": "422e46d1b86fa534d5054496a5efc8d9152eebc0d38a74db52845faf9f30561c",
         "height": 1,
         "body": {
-            "walletAddress": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT",
+            "address": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT",
             "star": {
                 "dec": "68° 52' 56.9",
                 "ra": "16h 29m 1.0s",
@@ -285,7 +285,7 @@ Returns block(s) from blockchain matching wallet address.
         "hash": "0ffb3bdeaf779fb297d357b1e3b79e1f7f15337e3ca91aa715b3279cdf3f4df6",
         "height": 2,
         "body": {
-            "walletAddress": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT",
+            "address": "12m14JXqX6DbwwFoScrUyaSPhPTbheuGfT",
             "star": {
                 "dec": "68° 52' 53.9",
                 "ra": "16h 29m 1.0s",
